@@ -27,7 +27,7 @@ To get a stream of only the files that match a given pattern do:
     var path  = 'path/to/folder/to/scan';
     var pattern = /\.jpg$/;
     var files = require('dirstream').createStream(path, pattern);
-    files.on('data', function (jpg) {
+    files.on('data', function (file) {
       console.log(file);
     });
     files.on('count', function (count) {
