@@ -5,5 +5,12 @@
 , "devDependencies": { "mocha": "*", "docco": "*" }
 , "scripts":
   { "test": "mocha -u tdd -G -R list" }
+, "repository":
+  { "type": "git"
+  , "url": "git://github.com/simme/node-dirstream.git"
+  }
+, "keywords":
+  ["stream", "directory", "dir"]
+, "main": "dirstream.js"
 }
 
