@@ -14,7 +14,7 @@ Install with NPM:
 To get a stream of file names from a target directory just do:
 
     var path  = 'path/to/folder/to/scan';
-    var files = require('dirstream').createStream(path);
+    var files = require('dirstream')(path);
     files.on('data', function (file) {
       console.log(file);
     });
@@ -26,7 +26,7 @@ To get a stream of only the files that match a given pattern do:
 
     var path  = 'path/to/folder/to/scan';
     var pattern = /\.jpg$/; // Only give me jpgs
-    var files = require('dirstream').createStream(path, pattern);
+    var files = require('dirstream')(path, pattern);
     files.on('data', function (jpgname) {
       console.log(jpgname);
     });
