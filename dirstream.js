@@ -49,6 +49,8 @@ var DirStream = function (path, filter) {
   this.filter = filter;
   // Is currently streaming, internal
   this._streaming = false;
+  // Files have been loaded
+  this._filesLoaded = false;
 
   // Check if target directory exists
   var self = this;
@@ -99,6 +101,7 @@ DirStream.prototype.handleFiles = function (err, files) {
   // Save total amount of files and emit the count.
   this.files = files;
   this.total = files.length;
+  this._filesLoaded = true;
   this.emit('count', this.total);
 
   // Start streaming
@@ -120,7 +123,7 @@ DirStream.prototype._stream = function (hint) {
   }
 
   // If `shift` didn't result in a file, this is the end.
-  if (!this.files.length) {
+  if (!this.files.length && this._filesLoaded) {
     this.emit('end');
     this.emit('close');
   }
