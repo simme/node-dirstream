@@ -25,10 +25,10 @@ To get a stream of file names from a target directory just do:
 To get a stream of only the files that match a given pattern do:
 
     var path  = 'path/to/folder/to/scan';
-    var pattern = /\.jpg$/;
+    var pattern = /\.jpg$/; // Only give me jpgs
     var files = require('dirstream').createStream(path, pattern);
-    files.on('data', function (jpg) {
-      console.log(file);
+    files.on('data', function (jpgname) {
+      console.log(jpgname);
     });
     files.on('count', function (count) {
       console.log('Hang on for a stream of ' + count + ' files!');
