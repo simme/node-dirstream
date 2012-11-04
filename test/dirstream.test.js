@@ -41,5 +41,23 @@ suite('DirStream', function () {
     });
   });
 
+  test('Pipe works.', function (done) {
+    var d = new dirstream(path);
+    var piped = 0;
+    var stream = new require('stream')();
+    stream.writable = true;
+    stream.write = function(file) {
+      piped++;
+    };
+    stream.end = function() {
+      assert(piped, 5, 'Piped count wrong.');
+      done();
+    };
+    d.pipe(stream);
+    stream.emit('drain');
+    // or
+    // d.resume();
+  });
+
 });
 
