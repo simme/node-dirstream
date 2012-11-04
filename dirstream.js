@@ -148,8 +148,7 @@ DirStream.prototype.resume = function () {
 //
 // # Exported API
 //
-module.exports.DirStream = DirStream;
-module.exports.createDirStream = function (path, filter) {
+module.exports = function (path, filter) {
   return new DirStream(path, filter);
 };
-
+module.exports.DirStream = DirStream;
