@@ -34,6 +34,15 @@ To get a stream of only the files that match a given pattern do:
       console.log('Hang on for a stream of ' + count + ' files!');
     });
 
+If you want absolute paths instead of only the file name from the `data`
+events you can pass a boolean flag to the constructor. Like so:
+
+    var path = ...;
+    var files = require('dirstream')(path, true);
+
+    // Works with filters too
+    var files = require('dirstream')(path, true, /.\.log$/);
+
 # Events
 
 ## count
