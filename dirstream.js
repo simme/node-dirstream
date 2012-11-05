@@ -17,6 +17,8 @@ var Inherit = require('util').inherits;
 var ReadDir = require('fs').readdir;
 // Stat function.
 var Stat = require('fs').stat;
+// Join path
+var JoinPath = require('path').join;
 
 //
 // ## DirStream
@@ -27,6 +29,11 @@ var Stat = require('fs').stat;
 //
 //   Path to the directory to scan.
 //
+// * absolute
+//
+//   Optional flag indicating if absolute paths or only filename should
+//   be emitted.
+//
 // * filter
 //
 //   Optional regex to filter files by. Filenames matching the filter will be
@@ -36,11 +43,24 @@ var Stat = require('fs').stat;
 //
 // * dirstream
 //
-var DirStream = function (path, filter) {
+var DirStream = function (path, absolute, filter) {
+  // Argument flipping
+  if (typeof absolute === 'object') {
+    filter = absolute;
+    absolute = false;
+  }
+  else if (typeof absolute !== 'boolean') {
+    absolute = false;
+  }
+
   // Call super constructor
   Stream.call(this);
   // Set readable
   this.readable = true;
+  // Remember path
+  this.path = path;
+  // Emit absolute paths?
+  this.absolute = absolute;
   // File list
   this.files = [];
   // Total number of files
@@ -119,6 +139,9 @@ DirStream.prototype._stream = function (hint) {
   var file;
   while (this._streaming && this.files.length) {
     file = this.files.shift();
+    if (this.absolute) {
+      file = JoinPath(this.path, file);
+    }
     this.emit('data', file);
   }
 
