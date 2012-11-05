@@ -1,7 +1,7 @@
 { "name": "dirstream"
 , "description": "Stream file names from a given directory."
 , "author": "Simon Ljungberg <hi@iamsim.me>"
-, "version": "0.0.2"
+, "version": "0.0.3"
 , "devDependencies": { "mocha": "*", "docco": "*" }
 , "scripts":
   { "test": "mocha -u tdd -G -R list" }
